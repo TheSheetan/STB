@@ -7,13 +7,15 @@ uname -a
 nmcli radio
 
 #Download driver
-wget https://codeload.github.com/awanservers/rtl8189ES_linux_Driver_Wifi_STB_HG680P/zip/refs/heads/rtl8189fs
+download ZIP dari:
+https://github.com/jwrdegoede/rtl8189ES_linux
+lalu masukkan ke STB
 
 #atau download di drive yang saya bagikan
-unzip rtl8189ES_linux_Driver_Wifi_STB_HG680P-rtl8189fs.zip
+unzip rtl8189ES_linux-master.zip
 
 #masuk ke directory
-cd rtl8189ES_linux_Driver_Wifi_STB_HG680P-rtl8189fs
+cd rtl8189ES_linux-master
 
 #compile driver
 make -j4 ARCH=arm64 KSRC=/lib/modules/$(uname -r)/build
