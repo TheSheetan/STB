@@ -20,6 +20,9 @@ cd rtl8189ES_linux-master
 #compile driver
 make -j4 ARCH=arm64 KSRC=/lib/modules/$(uname -r)/build
 
+#rename
+cp 8189es.ko 8189fs.ko
+
 #copy hasil kompilasi modul (8189fs.ko) ke dalam /lib/modules/$(uname -r)/kernel/drivers/net/wireless/
 sudo cp 8189fs.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/
 
