@@ -1,0 +1,45 @@
+#command untuk compile driver wifi STB HG680P
+
+#cek kernel
+uname -a
+
+#Cek status jaringan
+nmcli radio
+
+#Download driver
+wget https://codeload.github.com/awanservers/rtl8189ES_linux_Driver_Wifi_STB_HG680P/zip/refs/heads/rtl8189fs
+
+#atau download di drive yang saya bagikan
+unzip rtl8189ES_linux_Driver_Wifi_STB_HG680P-rtl8189fs.zip
+
+#masuk ke directory
+cd rtl8189ES_linux_Driver_Wifi_STB_HG680P-rtl8189fs
+
+#compile driver
+make -j4 ARCH=arm64 KSRC=/lib/modules/$(uname -r)/build
+
+#copy hasil kompilasi modul (8189fs.ko) ke dalam /lib/modules/$(uname -r)/kernel/drivers/net/wireless/
+sudo cp 8189fs.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/
+
+#susun ulang dependency modul agar bisa dimuat dengan modprobe
+depmod -a
+
+#aktifkan driver
+modprobe 8189fs
+
+#test wifi
+nmcli radio
+
+#cek daftar wifi
+nmcli dev wifi list
+
+#hubugkan ke salah satu wifi
+nmcli dev wifi connect "Nama SSID" password "password"
+
+#untuk melihat wifi yang aktif
+nmcli connection show --active
+
+#aktif dan nonaktifkan wifi
+nmcli radio wifi on
+nmcli radio wifi off
+
